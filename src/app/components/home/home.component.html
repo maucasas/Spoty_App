@@ -1,0 +1,16 @@
+<app-loading *ngIf="loading">
+</app-loading>
+<div class="card-columns">
+    <div class="card" *ngFor='let albums of nuevasCanciones'>
+        <img class="card-img-top" [src]="albums.images | noImages" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{albums.name}}</h5>
+            <p class="card-text">
+                <span *ngFor="let artista of albums.artists" class="badge badge-primary">{{artista.name}}</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="card-body" *ngIf="nuevasCanciones.length == 0" class="alert-info">
+        <div width="100%;"> No se encontraron resultados para la busqueda:</div>
+    </div>

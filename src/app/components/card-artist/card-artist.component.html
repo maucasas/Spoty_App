@@ -1,0 +1,21 @@
+<div *ngIf="artist != undefined" class="card m-2" style="width: 18rem;">
+    <div *ngIf="artist.images != null">
+        <img class="card-img-top" [src]="artist.images | noImages">
+
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{artist.name}}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+
+<div *ngIf="track != undefined" class="card m-2" style="width: 18rem;">
+    <div *ngIf="track.album.images != null">
+        <img class="card-img-top" [src]="track.album['images'] | noImages">
+
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{track.name}}</h5>
+        <p class="card-text">{{track.album.artists[0]}}</p>
+    </div>
+</div>
