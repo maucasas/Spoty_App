@@ -20,9 +20,12 @@ import { NoImagesPipe } from './pipes/no-images.pipe';
 
 import { SpotifyService } from './services/spotify.service';
 import { LoadingComponent } from './components/shared/loading/loading.component';
+import { ArtistComponent } from './components/artist/artist.component';
+import { DomSeguroPipe } from './pipes/dom-seguro.pipe';
+import { ErrorsComponent } from './components/errors/errors.component';
 
-
-
+// angular Material
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,14 +35,17 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
     NavbarComponent,
     CardArtistComponent,
     NoImagesPipe,
-    LoadingComponent
+    LoadingComponent,
+    ArtistComponent,
+    DomSeguroPipe,
+    ErrorsComponent,
   ],
   imports: [
     HttpClientModule,
-    BrowserModule,
-    RouterModule.forRoot(ROUTES, {useHash: true})
+    RouterModule.forRoot(ROUTES, {useHash: true}),
+    BrowserAnimationsModule,
   ],
   providers: [SpotifyService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

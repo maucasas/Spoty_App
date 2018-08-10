@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { SpotifyService } from '../../services/spotify.service';
-import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-home',
@@ -10,20 +8,20 @@ import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 })
 export class HomeComponent  {
 
-  nuevasCanciones: any [] = [''];
+  nuevasCanciones: any [] = [];
   loading: boolean;
-  constructor(private spotify: SpotifyService) {
+  error: boolean;
+  mensajeError: string;
+  constructor(private spotifyService: SpotifyService) {
     this.loading = true;
-    this.getNewReleases();
-   }
-
-getNewReleases() {
-  this.spotify.getNewReleases().subscribe((data: any) => {console.log(data); this.nuevasCanciones = data; });
-  this.loading = false;
-}
-
-
-
+    this.spotifyService.getNewReleases()
+    .subscribe((data: any) => { this.nuevasCanciones = data; }, (errorApiSpotify) => {
+       this.mensajeError = errorApiSpotify.error.error.message;
+       this.error = true;
+       console.log('Informacion de Error:', this.mensajeError);
+    this.loading = false;
+     });
+  }
 }
 
 

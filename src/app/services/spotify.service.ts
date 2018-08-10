@@ -1,12 +1,12 @@
+import { Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpBackend, HttpResponseBase } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SpotifyService {
-  albums: any;
-  credentialsSpotyApp: string;
-  bearer = 'BQDqiAD4CJPti2x4ZMe6dpFAsLRSTUj3A2lGTkCpZX1QgVulJNrr5hUBNpYM2YwzezEVNIoVgBfmZ1m-xtQ';
+  bearer = 'QCX9jJUAp_LI73bFxLWy52b62dh7VIoL2J4DzPOYQ9korz-88rbTo5qJR4Ca0nzL_kHlJE_VYD1AqeFpFU';
+
 
   constructor(private http: HttpClient) {
     console.log('Spotify Service listo');
@@ -16,13 +16,9 @@ export class SpotifyService {
 
       const headers = new HttpHeaders ({
         'Authorization': `Bearer ${this.bearer}`});
-
         return this.http.get(url, {headers});
    }
   getNewReleases() {
-    const headers = new HttpHeaders ({
-      'Authorization': `Bearer ${this.bearer}`
-    });
     return this.getQuery('browse/new-releases')
                         .pipe(map(data => data['albums'].items ));
   }
@@ -31,10 +27,15 @@ export class SpotifyService {
     return this.getQuery(`search?q=${word}&type=track&market=CO&limit=15`)
                     .pipe(map(data => data['tracks'].items ));
     }
-  getArtist(word: string) {
+  getArtists(word: string) {
         return this.getQuery(`search?q=${word}&type=artist&market=CO&limit=20`)
         .pipe(map(data =>  data['artists'].items));
       }
-  getToken() {
-      }
+  getArtistByID(id: string) {
+   return this.getQuery(`artists/${id}`);
+  }
+  getTopTracks (id: string) {
+    return this.getQuery(`artists/${ id }/top-tracks/?country=us`)
+              .pipe(map(tracks => tracks['tracks'] ) );
+  }
 }

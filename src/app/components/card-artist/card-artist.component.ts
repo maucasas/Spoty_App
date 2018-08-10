@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-artist',
@@ -9,8 +9,19 @@ import { RouterModule } from '@angular/router';
 export class CardArtistComponent implements OnInit {
 @Input() artist: any;
 @Input() track: any;
-  constructor() { }
+  constructor( private router: Router) {
+   }
 
   ngOnInit() {}
+
+  verArtista( item: any ) {
+    let id: any;
+    if (item.type === 'artist') {
+          id = item.id;
+    } else {
+      id = item.id;
+    }
+     this.router.navigate( ['/artist', item.id] );
+   }
 
 }

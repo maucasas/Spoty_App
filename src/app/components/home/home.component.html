@@ -1,6 +1,8 @@
-<app-loading *ngIf="loading">
-</app-loading>
-<div class="card-columns">
+<app-loading *ngIf="loading"></app-loading>
+<app-errors *ngIf="mensajeError != null" [messageInput]="mensajeError"></app-errors>
+
+
+<div class="card-columns" *ngIf="!loading">
     <div class="card" *ngFor='let albums of nuevasCanciones'>
         <img class="card-img-top" [src]="albums.images | noImages" alt="Card image cap">
         <div class="card-body">
@@ -11,6 +13,6 @@
         </div>
     </div>
 
-    <div class="card-body" *ngIf="nuevasCanciones.length == 0" class="alert-info">
-        <div width="100%;"> No se encontraron resultados para la busqueda:</div>
+    <div class="card-body m-5" *ngIf="error" class="alert-info ">
+        <div width="100%; "> {{mensajeError}}</div>
     </div>

@@ -3,23 +3,29 @@
 
 <div class="row">
     <div class="col">
-        <input type="text" placeholder="Buscar Artista" class="form-control" (onchange)="searchArtist(busquedasArtista.value)" #busquedasArtista>
+        <input type="text" placeholder="Buscar Artista" class="form-control" ng-model="searchArtist(busquedasArtista.value)" #busquedasArtista>
         <label for="text">busquedas por artista</label>
-        <button class="btn btn-alert" (click)="searchArtist(busquedasArtista.value)"></button>
+        <button class="btn btn-alert" (click)="searchArtist(busquedasArtista.value, false)"></button>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <input type="text" placeholder="Buscar Tracks" class="form-control" (keyup)="searchTrack(busquedasTracks.value)" #busquedasTracks>
+        <input type="text" placeholder="Buscar Tracks" class="form-control" (onchange)="searchTrack(busquedasTracks.value)" #busquedasTracks>
         <label for="text">buscar por tracks</label>
         <button class="btn btn-alert" item-width="50px;" type="button" (click)="searchTrack(busquedasTracks.value)"></button>
     </div>
 </div>
+<!-- para Artistas -->
+<div *ngIf="!tagTracks">
+    <h1>Artistas</h1>
+    <app-card-artist class="card-columns" *ngFor="let item of artists" [artist]="item"></app-card-artist>
+</div>
 
-<app-card-artist class="card-columns" *ngFor="let artist of artists" [artist]="artist"></app-card-artist>
-<app-card-artist class="car.columns" *ngFor="let track of tracks" [track]="track"></app-card-artist>
-
-
+<!-- para tracks -->
+<div *ngIf="!tagArtist">
+    <h1>Tracks</h1>
+    <app-card-artist class="car.columns" *ngFor="let album of tracks" [track]="album"></app-card-artist>
+</div>
 <div class="alert alert-danger" *ngIf="empty">
-    <p>no hay resultados</p>
+    <p>no hay resultados</p>s
 </div>
