@@ -1,4 +1,3 @@
-import { Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpBackend, HttpResponseBase } from '@angular/common/http';
 import { map } from 'rxjs/operators';
